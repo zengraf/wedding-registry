@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+archived:
+  name: Jan
+  surname: Kowalski
+  phone_number: +48111222333
+  date: 2019-11-14
+  deposit: 500.00
+  hall_id: 1
+  confirmed: true
+  added_by: pawel
+
+upcoming:
+  name: Grzegorz
+  surname: Brzęczyszczykiewicz
+  phone_number: +48444555666
+  date: 2021-07-04
+  deposit: 1000.00
+  hall_id: 2
+  confirmed: false
+  added_by: pawel
