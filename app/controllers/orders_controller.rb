@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :require_login
 
   def index
-    @orders = Order.where('date >= ?', Date.today).order(date: :desc)
+    @orders = Order.where('date >= ?', Date.today).order(:date)
     filter
   end
 
@@ -50,13 +50,6 @@ class OrdersController < ApplicationController
   end
 
   private
-
-  def require_login
-    return true if logged_in?
-
-    flash[:error] =  'Żeby uzyskać dostęp do tej strony, należy zalogować się'
-    redirect_to login_url
-  end
 
   def filter
     return false unless params[:filter]

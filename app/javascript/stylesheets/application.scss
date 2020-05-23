@@ -1,2 +1,26 @@
 @import "~bootstrap/scss/bootstrap";
 @import '@fortawesome/fontawesome-free';
+
+@mixin box_sizing {
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing:         border-box;
+}
+
+/* miscellaneous */
+
+.appear-on-hover {
+    opacity: 0;
+}
+
+tr:hover .appear-on-hover {
+    opacity: 1;
+}
+
+.debug_box {
+    clear: both;
+    float: left;
+    width: 100%;
+    font-family: monospace;
+    @include box_sizing;
+}

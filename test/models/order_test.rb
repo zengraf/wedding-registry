@@ -5,6 +5,10 @@ class OrderTest < ActiveSupport::TestCase
     @order = orders(:upcoming)
   end
 
+  test "should be valid" do
+    assert @order.valid?
+  end
+
   test "name should be present" do
     @order.name = "  "
     assert_not @order.valid?

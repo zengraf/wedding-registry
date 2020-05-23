@@ -6,6 +6,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     @upcoming = orders(:upcoming)
     @admin = users(:daria)
     @non_admin = users(:pawel)
+    @non_admin.password = "bartoszKool1357"
   end
 
   test "should redirect index when not logged in" do
@@ -67,10 +68,10 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_equal old_deposit, @upcoming.deposit
   end
 
-  test "non-admin should not delete orders" do
+  test "non-admin should not delete confirmed orders" do
     log_in(@non_admin)
     assert_no_difference 'Order.count' do
-      delete order_url(@upcoming)
+      delete order_url(@archived)
     end
   end
   

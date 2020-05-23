@@ -12,7 +12,7 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
-module SignInHelper
+module LogInHelper
   def log_in(user)
     post login_url(session: {email: user.email, password: user.password})
   end
@@ -23,5 +23,5 @@ module SignInHelper
 end
  
 class ActionDispatch::IntegrationTest
-  include SignInHelper
+  include LogInHelper
 end

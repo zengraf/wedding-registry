@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   validates :deposit, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :hall, presence: true
   validates :confirmed, inclusion: { in: [true, false] }
+  validates :date, presence: true
 
   enum hall: [ :small, :big ]
 end
