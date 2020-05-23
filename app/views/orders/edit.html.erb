@@ -29,7 +29,7 @@
             <div class="from-group col">
                 <%= f.label :hall, "Sala" %>
                 <select id="order_hall" name="order[hall]" class="form-control" <%= 'disabled' if disabled %>>
-                    <%= options_for_select([["Mała", 0], ["Duża", 1]], @order.hall) %>
+                    <%= options_for_select([["Mała", "small"], ["Duża", "big"]], @order.hall) %>
                 </select>
             </div>
             <div class="from-group col">

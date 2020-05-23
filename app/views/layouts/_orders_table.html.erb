@@ -19,7 +19,7 @@
                     <th scope="row"><%= order.id %></th>
                     <td><%= order.name %></td>
                     <td><%= order.surname %></td>
-                    <td><%= order.phone_number %></td>
+                    <td><%= TelephoneNumber.parse(order.phone_number).international_number(formatted: true) %></td>
                     <td><%= order.date %></td>
                     <td><%= order.deposit %></td>
                     <td>

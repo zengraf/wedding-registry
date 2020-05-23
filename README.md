@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a web app for managing orders in a wedding agency. It is a project for my Program Engineering class.
 
-Things you may want to cover:
+## Dependencies
 
-* Ruby version
+- `ruby` 2.7.1
+- `sqlite3`
+- `node` >= 8.16.0
+- `yarn` >= 1.0.0
 
-* System dependencies
+To install Ruby and dependencies for Rails you can follow [this guide](https://guides.rubyonrails.org/getting_started.html#creating-a-new-rails-project-installing-rails).
 
-* Configuration
+## Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To run basic configuration for development server execute
+```bash
+chmod +x setup.sh
+./setup.sh
+```
