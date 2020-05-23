@@ -5,9 +5,9 @@ class CreateOrders < ActiveRecord::Migration[6.0]
       t.string :surname
       t.string :phone_number
       t.date :date
-      t.numeric :deposit
-      t.integer :hall_id
-      t.boolean :confirmed
+      t.decimal :deposit, precision: 10, scale: 2
+      t.integer :hall
+      t.boolean :confirmed, default: false
       t.references :added_by, null: false, foreign_key: { to_table: :users }
 
       t.timestamps

@@ -1,2 +1,44 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+<%= render 'shared/error_messages' %>
+<h2>Nowe zamówienie</h2>
+<div class="card card-body my-4">
+    <%= form_for @order, class: "form-inline" do |f| %>
+        <div class="row">
+            <div class="from-group col">
+                <%= f.label :name, "Imię" %>
+                <%= f.text_field :name, class: "form-control" %>
+            </div>
+            <div class="from-group col">
+                <%= f.label :surname, "Nazwisko" %>
+                <%= f.text_field :surname, class: "form-control" %>
+            </div>
+            <div class="from-group col">
+                <%= f.label :phone_number, "Numer komórkowy" %>
+                <%= f.date_field :phone_number, class: "form-control" %>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="from-group col">
+                <%= f.label :date, "Data wesela" %>
+                <%= f.date_field :date, class: "form-control", value: Date.tomorrow %>
+            </div>
+            <div class="form-group col">
+                <%= f.label :deposit, "Płatność wstępna" %>
+                <%= f.number_field :deposit, step: :any, class: "form-control" %>
+            </div>
+            <div class="from-group col">
+                <%= f.label :hall, "Sala" %>
+                <select id="order_hall" name="order[hall]" class="form-control">
+                    <%= options_for_select([["Mała", "small"], ["Duża", "big"]], 0) %>
+                </select>
+            </div>
+            <div class="from-group col">
+                <%= f.label :confirmed, "Status" %>
+                <select id="order_confirmed" name="order[confirmed]" class="form-control" <%= 'disabled' unless current_user.admin? %>>
+                    <%= options_for_select([["Nie potwierdzone", 0], ["Potwierdzone", 1]], 0) %>
+                </select>
+            </div>
+        </div><br>
+        <%= f.submit "Zapisz", class: "btn btn-primary form-group mr-2" %>
+        <%= link_to "Anuluj", orders_path, class: "btn btn-outline-primary form-group" %>
+    <% end %>
+</div>

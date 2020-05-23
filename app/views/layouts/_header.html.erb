@@ -1,0 +1,17 @@
+<nav class="navbar navbar-light navbar-expand-md justify-content-between bg-light">
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <%= link_to 'Zamówienia', orders_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+                <%= link_to 'Archiwum', archive_path, class: 'nav-link' %>
+            </li>
+        </ul>
+    </div>
+    <span class="navbar-text">
+        <% if logged_in? %>
+            Jesteś zalogowany jako <b><%= current_user.email %></b><%= link_to fa_icon('sign-out-alt', type: :solid, text: '  Wylouj się'), logout_path, class: "btn btn-primary text-light mx-3" %>
+        <% end %>
+    </span>
+</nav>

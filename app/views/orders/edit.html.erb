@@ -1,0 +1,50 @@
+<%= render 'shared/error_messages' %>
+<h2>Edytuj zamówienie №<%= @order.id %></h2>
+<div class="card card-body my-4">
+    <%= form_for @order, class: "form-inline" do |f| %>
+        <% disabled ||= @order.confirmed? && !current_user.admin? %>
+        <div class="row">
+            <div class="from-group col">
+                <%= f.label :name, "Imię" %>
+                <%= f.text_field :name, class: "form-control", value: @order.name, disabled: disabled %>
+            </div>
+            <div class="from-group col">
+                <%= f.label :surname, "Nazwisko" %>
+                <%= f.text_field :surname, class: "form-control", value: @order.surname, disabled: disabled %>
+            </div>
+            <div class="from-group col">
+                <%= f.label :phone_number, "Numer komórkowy" %>
+                <%= f.text_field :phone_number, class: "form-control", value: @order.phone_number, disabled: disabled %>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="from-group col">
+                <%= f.label :date, "Data wesela" %>
+                <%= f.date_field :date, class: "form-control", value: @order.date, disabled: disabled %>
+            </div>
+            <div class="form-group col">
+                <%= f.label :deposit, "Płatność wstępna" %>
+                <%= f.number_field :deposit, step: :any, class: "form-control", value: @order.deposit, disabled: disabled %>
+            </div>
+            <div class="from-group col">
+                <%= f.label :hall, "Sala" %>
+                <select id="order_hall" name="order[hall]" class="form-control" <%= 'disabled' if disabled %>>
+                    <%= options_for_select([["Mała", 0], ["Duża", 1]], @order.hall) %>
+                </select>
+            </div>
+            <div class="from-group col">
+                <%= f.label :confirmed, "Status" %>
+                <select id="order_confirmed" name="order[confirmed]" class="form-control" <%= 'disabled' unless current_user.admin? %>>
+                    <%= options_for_select([["Nie potwierdzone", 0], ["Potwierdzone", 1]], @order.confirmed? ? 1 : 0) %>
+                </select>
+            </div>
+        </div><br>
+        <%= f.submit "Zapisz", class: "btn btn-primary form-group mr-2", disabled: disabled %>
+        <%= link_to "Anuluj", @order.date >= Date.today ? orders_path : archive_path, class: "btn btn-outline-primary form-group" %>
+        <% unless disabled %>
+            <%= link_to "Wykasuj", @order, method: :delete, data: { confirm: "Jesteś pewny, że chcesz wykasować zamówienie №#{@order.id}?" }, class: "float-right btn btn-danger" %>
+        <% else %>
+            <button class="float-right btn btn-danger" disabled>Wykasuj</button>
+        <% end %>
+    <% end %>
+</div>

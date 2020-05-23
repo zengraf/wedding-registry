@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 2020_05_03_225026) do
     t.string "surname"
     t.string "phone_number"
     t.date "date"
-    t.decimal "deposit"
-    t.integer "hall_id"
-    t.boolean "confirmed"
+    t.decimal "deposit", precision: 10, scale: 2
+    t.integer "hall"
+    t.boolean "confirmed", default: false
     t.integer "added_by_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_05_03_225026) do
     t.string "surname"
     t.string "email"
     t.string "phone_number"
-    t.integer "role"
+    t.integer "role", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"

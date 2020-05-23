@@ -1,19 +1,23 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 pawel:
+  id: 0
   name: Paweł
   surname: Bartosz
   email: pawabarta@gmail.com
   phone_number: +48646286829
-  role: worker
-  password: bartoszKool1357
-  password_confirmation: bartoszKool1357
+  role: 0
+  #password: bartoszKool1357
+  #password_confirmation: bartoszKool1357
+  password_digest: $2a$04$4TI375x8nJxCo0E5DRogTeWgqsihwz96PWSMRpbEtBBZpeXxyTaBG
 
 daria:
+  id: 1
   name: Daria
   surname: Nowak
   email: d.nowak228@gmail.com
   phone_number: +48739367364
-  role: admin
-  password: qwertyasdf1234
-  password_confirmation: qwertyasdf1234
+  role: 1
+  #password: qwertyasdf1234
+  #password_confirmation: qwertyasdf1234
+  password_digest: $2a$12$iqXPlPsWhuoiElheTJMxLuX7D/6GwtUJ0jGk2jmtcGOWUXTkc79mC

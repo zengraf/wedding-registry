@@ -6,7 +6,7 @@ archived:
   phone_number: +48111222333
   date: 2019-11-14
   deposit: 500.00
-  hall_id: 1
+  hall: 0
   confirmed: true
   added_by: pawel
 
@@ -16,6 +16,6 @@ upcoming:
   phone_number: +48444555666
   date: 2021-07-04
   deposit: 1000.00
-  hall_id: 2
+  hall: 1
   confirmed: false
   added_by: pawel

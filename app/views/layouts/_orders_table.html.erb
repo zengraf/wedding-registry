@@ -1,0 +1,50 @@
+<% if @orders.any? %>
+    <table class="table table-hover orders-table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Numer komórkowy</th>
+                <th scope="col">Data wesela</th>
+                <th scope="col">Płatność wstępna</th>
+                <th scope="col">Sala</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @orders.each do |order| %>
+                <tr>
+                    <th scope="row"><%= order.id %></th>
+                    <td><%= order.name %></td>
+                    <td><%= order.surname %></td>
+                    <td><%= order.phone_number %></td>
+                    <td><%= order.date %></td>
+                    <td><%= order.deposit %></td>
+                    <td>
+                        <% case order.hall
+                           when "small" %>Mała
+                        <% when "big" %>Duża
+                        <% else %>--
+                        <% end %>
+                    </td>
+                    <td>
+                        <% if order.confirmed %>
+                            Potwierdzone
+                        <% else %>
+                            Nie potwierdzone
+                        <% end %>
+                    </td>
+                    <td class="appear-on-hover">
+                        <%= link_to fa_icon(:edit, type: :solid), edit_order_path(order), class: "text-secondary" %>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+<% else %>
+    <div class="alert alert-secondary">
+        Zamówień nie znaleziono
+    </div>
+<% end %>

@@ -2,6 +2,7 @@ require 'test_helper'
 
 class SessionsControllerTest < ActionDispatch::IntegrationTest
   def setup
+    get root_url
     @user = users(:pawel)
   end
 
@@ -11,16 +12,14 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should be no session by default" do
-    assert_not logged_in?
+    get orders_url
+    assert_redirected_to login_url
   end
 
   test "should be no session after log-out" do
     log_in(@user)
     log_out
-    assert_not logged_in?
+    get orders_url
+    assert_redirected_to login_url
   end
-
-  test "should be correct current user" do
-    log_in(@user)
-    assert_equal @user, current_user
 end

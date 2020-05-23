@@ -1,0 +1,9 @@
+<% if @order.errors.any? %>
+    <div class="alert alert-danger">
+        <ul class="m-0">
+            <% @order.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>

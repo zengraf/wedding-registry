@@ -1,0 +1,33 @@
+<h2 class="float-left">Nadchodzące zamówienia</h2>
+<div class="d-flex flex-row-reverse my-4">
+    <%= link_to fa_icon(:plus, text: '  Nowe zamówienie'), new_order_path, class: "btn btn-primary" %>
+    <button class="btn btn-outline-primary mr-3" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+        <%= fa_icon 'calendar-alt', type: :regular, text: '  Filtry' %>
+    </button>
+</div>
+<div class="collapse <%= 'show' if params[:filter] && !(@from.empty? && @to.empty? && @status.zero?) %>" id="collapseFilter">
+    <div class="card card-body mb-4">
+        <%= form_for :filter, method: :get, url: orders_path, class: "form-inline" do |f| %>
+            <div class="row">
+                <div class="from-group col">
+                    <%= f.label :from, "Od" %>
+                    <%= f.date_field :from, class: "form-control", value: @from %>
+                </div>
+                <div class="from-group col">
+                    <%= f.label :to, "Do" %>
+                    <%= f.date_field :to, class: "form-control", value: @to %>
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="from-group col">
+                    <%= f.label :status, "Status" %>
+                    <select id="filter_status" name="filter[status]" class="form-control">
+                        <%= options_for_select([["Wszystkie", 0], ["Potwierdzone", 1], ["Nie potwierdzone", 2]], @status || 0) %>
+                    </select>
+                </div>
+            </div><br>
+            <%= f.submit "Szukaj", class: "btn btn-primary form-group" %>
+        <% end %>
+    </div>
+</div>
+<%= render 'layouts/orders_table' %>
