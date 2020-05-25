@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  before_action :require_login
   before_action :order_exists_and_permitted?, only: [:edit, :update, :destroy]
 
   def index
