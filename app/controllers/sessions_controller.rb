@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
       log_in user
       redirect_to orders_url
     else
+      # Display incorrect credentials error on login screen
       flash.now[:danger] = 'Wprowadzono niepoprawny email lub hasło'
       render 'new'
     end

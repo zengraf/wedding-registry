@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :require_login
+  before_action :order_exists_and_permitted?, only: [:edit, :update, :destroy]
 
   def index
     @orders = Order.where('date >= ?', Date.today).order(:date)
@@ -18,33 +19,28 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.added_by = current_user
+
     if @order.save
-      redirect_to orders_path, success: "Zamówienie №#{@order.id} zostało pomyślnie złożone"
+      flash[:success] = "Zamówienie №#{@order.id} zostało pomyślnie złożone"
+      redirect_to orders_path
     else
       render 'new'
     end
   end
 
   def edit
-    @order = Order.find(params[:id])
-    return does_not_exist if @order.nil?
   end
 
   def update
-    @order = Order.find(params[:id])
-    return does_not_exist if @order.nil?
-    return not_admin if @order.confirmed? && !current_user.admin?
     if @order.update_attributes(order_params)
-      redirect_to @order.date >= Date.today ? orders_path : archive_path, success: "Zamówienie №#{@order.id} zostało pomyślnie zmienione"
+      flash[:success] = "Zamówienie №#{@order.id} zostało pomyślnie zmienione"
+      redirect_to @order.date >= Date.today ? orders_path : archive_path
     else
       render 'edit'
     end
   end
 
   def destroy
-    @order = Order.find(params[:id])
-    return does_not_exist if @order.nil?
-    return not_admin if @order.confirmed? && !current_user.admin?
     @order.destroy
     redirect_to orders_url
   end
@@ -70,11 +66,24 @@ class OrdersController < ApplicationController
     end
   end
 
+  def order_exists_and_permitted?
+    begin
+      @order = Order.find(params[:id])
+      return not_admin if @order.confirmed? && !current_user.admin?
+    rescue ActiveRecord::RecordNotFound => exception
+      return does_not_exist
+    end
+  end
+
   def does_not_exist
-    redirect_to orders_path, alert: "Zamówienie №#{params[:id]} nie istnieje"
+    flash[:warning] = "Zamówienie №#{params[:id]} nie istnieje"
+    redirect_to orders_path
+    return false
   end
 
   def not_admin
-    redirect_to @order.date >= Date.today ? orders_path : archive_path, alert: "Ta operacja dostępna wyłącznie administratoru"
+    flash[:warning] = "Ta operacja dostępna wyłącznie administratoru"
+    redirect_to @order.date >= Date.today ? orders_path : archive_path
+    return false
   end
 end
