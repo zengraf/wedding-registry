@@ -15,7 +15,7 @@
         </thead>
         <tbody>
             <% @orders.each do |order| %>
-                <tr>
+                <tr class="order" id="<%= order.id %>">
                     <th scope="row"><%= order.id %></th>
                     <td><%= order.name %></td>
                     <td><%= order.surname %></td>
@@ -30,7 +30,7 @@
                         <% end %>
                     </td>
                     <td>
-                        <% if order.confirmed %>
+                        <% if order.confirmed? %>
                             Potwierdzone
                         <% else %>
                             Nie potwierdzone

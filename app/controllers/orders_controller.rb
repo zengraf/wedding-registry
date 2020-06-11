@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    if @order.update_attributes(order_params)
+    if @order.update(order_params)
       flash[:success] = "Zamówienie №#{@order.id} zostało pomyślnie zmienione"
       redirect_to @order.date >= Date.today ? orders_path : archive_path
     else
