@@ -4,6 +4,8 @@ class OrdersTest < ApplicationSystemTestCase
   def setup
     @archived = orders(:archived)
     @upcoming = orders(:upcoming)
+    @confirmed = @archived
+    @not_confirmed = @upcoming
     @admin = users(:daria)
     @admin.password = 'qwertyasdf1234'
     @non_admin = users(:pawel)
@@ -47,13 +49,9 @@ class OrdersTest < ApplicationSystemTestCase
     assert_selector '.order', id: @upcoming.id.to_s
   end
 
-  test 'new upcoming order should appear in index' do
-    
-  end
-
   test 'old orders should be in archived' do
     browser_log_in(@non_admin)
-    visit archive_path
+    visit archive_url
 
     assert_selector '.order', id: @archived.id.to_s
   end
@@ -63,6 +61,13 @@ class OrdersTest < ApplicationSystemTestCase
     visit orders_url
 
     refute_selector '.order', id: @archived.id.to_s
+  end
+
+  test 'should display warning when non-admin trying to edit confirmed order' do
+    browser_log_in(@non_admin)
+    visit edit_order_url(@confirmed)
+
+    assert_selector '.alert-warning'
   end
 
   test 'order should be in filtered by date' do
