@@ -2,12 +2,12 @@ class OrdersController < ApplicationController
   before_action :order_exists_and_permitted?, only: [:edit, :update, :destroy]
 
   def index
-    @orders = Order.where('date >= ?', Date.today).order(:date)
+    @pagy, @orders = pagy(Order.where('date >= ?', Date.today).order(:date))
     filter
   end
 
   def archive
-    @orders = Order.where('date < ?', Date.today).order(date: :desc)
+    @pagy, @orders = pagy(Order.where('date < ?', Date.today).order(date: :desc))
     filter
   end
 

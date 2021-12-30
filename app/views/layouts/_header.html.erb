@@ -11,7 +11,7 @@
     </div>
     <span class="navbar-text">
         <% if logged_in? %>
-            Jesteś zalogowany jako <b><%= current_user.name %> <%= current_user.surname %> <%= '(admin)' if current_user.admin? %></b><%= link_to fa_icon('sign-out-alt', type: :solid, text: '  Wylouj się'), logout_path, class: "btn btn-primary text-light mx-3" %>
+            Jesteś zalogowany jako <b><%= current_user.name %> <%= current_user.surname %> <%= '(admin)' if current_user.admin? %></b><%= link_to fa_icon('sign-out-alt', type: :solid, text: '  Wylgouj się'), logout_path, class: "btn btn-primary text-light mx-3" %>
         <% end %>
     </span>
 </nav>
