@@ -1,0 +1,43 @@
+<%= form_for @order, class: "form-inline" do |f| %>
+    <div class="row">
+        <div class="from-group col">
+            <%= f.label :name, "Imię" %>
+            <%= f.text_field :name, class: "form-control", value: @order&.name, disabled: disabled %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :surname, "Nazwisko" %>
+            <%= f.text_field :surname, class: "form-control", value: @order&.surname, disabled: disabled %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :phone_number, "Numer komórkowy" %>
+            <%= f.text_field :phone_number, class: "form-control", value: @order&.phone_number, disabled: disabled %>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="from-group col">
+            <%= f.label :date, "Data wesela" %>
+            <%= f.date_field :date, class: "form-control", value: @order&.date || Date.tomorrow, disabled: disabled %>
+        </div>
+        <div class="form-group col">
+            <%= f.label :deposit, "Płatność wstępna" %>
+            <%= f.number_field :deposit, step: :any, class: "form-control", value: @order&.deposit, disabled: disabled %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :hall_id, "Sala" %>
+            <%= f.select :hall_id, Hall.all.collect { |h| [h.name, h.id] }, { selected: @order&.hall_id || Hall.first.id }, class: "form-control" %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :confirmed, "Status" %>
+            <%= f.select :confirmed, [["Nie potwierdzone", 0], ["Potwierdzone", 1]], { selected: @order&.confirmed? ? 1 : 0 }, class: "form-control", disabled: !current_user.admin? %>
+        </div>
+    </div><br>
+    <%= f.submit "Zapisz", class: "btn btn-primary form-group mr-2", disabled: disabled %>
+    <%= link_to "Anuluj", @order&.date || Date.today >= Date.today ? orders_path : archive_path, class: "btn btn-outline-primary form-group" %>
+    <% if @order.persisted? %>
+        <% unless disabled %>
+            <%= link_to "Wykasuj", @order, method: :delete, data: { confirm: "Jesteś pewny, że chcesz wykasować zamówienie №#{@order.id}?" }, class: "float-right btn btn-danger" %>
+        <% else %>
+            <button class="float-right btn btn-danger" disabled>Wykasuj</button>
+        <% end %>
+    <% end %>
+<% end %>
