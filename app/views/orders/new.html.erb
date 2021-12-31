@@ -26,16 +26,12 @@
                 <%= f.number_field :deposit, step: :any, class: "form-control" %>
             </div>
             <div class="from-group col">
-                <%= f.label :hall, "Sala" %>
-                <select id="order_hall" name="order[hall]" class="form-control">
-                    <%= options_for_select([["Mała", "small"], ["Duża", "big"]], 0) %>
-                </select>
+                <%= f.label :hall_id, "Sala" %>
+                <%= f.select :hall_id, Hall.all.collect { |h| [h.name, h.id] }, {}, class: "form-control" %>
             </div>
             <div class="from-group col">
                 <%= f.label :confirmed, "Status" %>
-                <select id="order_confirmed" name="order[confirmed]" class="form-control" <%= 'disabled' unless current_user.admin? %>>
-                    <%= options_for_select([["Nie potwierdzone", 0], ["Potwierdzone", 1]], 0) %>
-                </select>
+                <%= f.select :confirmed, [["Nie potwierdzone", 0], ["Potwierdzone", 1]], {selected: 0}, class: "form-control", disabled: !current_user.admin? %>
             </div>
         </div><br>
         <%= f.submit "Zapisz", class: "btn btn-primary form-group mr-2" %>

@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_03_225026) do
+ActiveRecord::Schema.define(version: 2021_12_31_141539) do
+
+  create_table "halls", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "orders", force: :cascade do |t|
     t.string "name"
@@ -18,12 +24,13 @@ ActiveRecord::Schema.define(version: 2020_05_03_225026) do
     t.string "phone_number"
     t.date "date"
     t.decimal "deposit", precision: 10, scale: 2
-    t.integer "hall"
     t.boolean "confirmed", default: false
     t.integer "added_by_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "hall_id", null: false
     t.index ["added_by_id"], name: "index_orders_on_added_by_id"
+    t.index ["hall_id"], name: "index_orders_on_hall_id"
   end
 
   create_table "users", force: :cascade do |t|

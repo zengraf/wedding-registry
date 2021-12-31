@@ -22,13 +22,7 @@
                     <td><%= TelephoneNumber.parse(order.phone_number).international_number(formatted: true) %></td>
                     <td><%= order.date %></td>
                     <td><%= order.deposit %></td>
-                    <td>
-                        <% case order.hall
-                           when "small" %>Mała
-                        <% when "big" %>Duża
-                        <% else %>--
-                        <% end %>
-                    </td>
+                    <td><%= order.hall.name %></td>
                     <td>
                         <% if order.confirmed? %>
                             Potwierdzone

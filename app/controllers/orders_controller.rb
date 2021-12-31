@@ -1,13 +1,13 @@
 class OrdersController < ApplicationController
-  before_action :order_exists_and_permitted?, only: [:edit, :update, :destroy]
+  before_action :order_exists_and_permitted?, only: %i[edit update destroy]
 
   def index
-    @pagy, @orders = pagy(Order.where('date >= ?', Date.today).order(:date))
+    @pagy, @orders = pagy(Order.upcoming.includes(:hall))
     filter
   end
 
   def archive
-    @pagy, @orders = pagy(Order.where('date < ?', Date.today).order(date: :desc))
+    @pagy, @orders = pagy(Order.archived.includes(:hall))
     filter
   end
 
@@ -16,8 +16,9 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
-    @order.added_by = current_user
+    @order = Order.new(order_params) do |order|
+      order.added_by = current_user
+    end
 
     if @order.save
       flash[:success] = "Zamówienie №#{@order.id} zostało pomyślnie złożone"
@@ -33,7 +34,7 @@ class OrdersController < ApplicationController
   def update
     if @order.update(order_params)
       flash[:success] = "Zamówienie №#{@order.id} zostało pomyślnie zmienione"
-      redirect_to @order.date >= Date.today ? orders_path : archive_path
+      redirect_to @order.date.past? ? archive_path : orders_path
     else
       render 'edit'
     end
@@ -59,9 +60,9 @@ class OrdersController < ApplicationController
 
   def order_params
     if current_user.admin?
-      params.require(:order).permit(:name, :surname, :phone_number, :date, :deposit, :hall, :confirmed)
+      params.require(:order).permit(:name, :surname, :phone_number, :date, :deposit, :hall_id, :confirmed)
     else
-      params.require(:order).permit(:name, :surname, :phone_number, :date, :deposit, :hall)
+      params.require(:order).permit(:name, :surname, :phone_number, :date, :deposit, :hall_id)
     end
   end
 
@@ -81,7 +82,7 @@ class OrdersController < ApplicationController
   end
 
   def not_admin
-    flash[:warning] = "Ta operacja dostępna wyłącznie administratoru"
+    flash[:warning] = "Ta operacja jest dostępna wyłącznie administratoru"
     redirect_to @order.date >= Date.today ? orders_path : archive_path
     return false
   end
