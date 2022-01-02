@@ -8,8 +8,15 @@ pl:
           has_one: Nie można usunąć, gdyż istnieje zależny od niego %{record}
           has_many: Nie można usunąć, gdyż istnieją zależne od niego %{record}
     models:
+      hall:
+        one: Sala
+        other: Sali
       order:
-        one: "Zamówienie"
+        one: Zamówienie
+        other: Zamówienia
+      user:
+        one: Użytkownik
+        other: Użytkownicy
   date:
     abbr_day_names:
     - nie
@@ -251,3 +258,24 @@ pl:
       long: "%-d %B %Y %H:%M"
       short: "%-d %b %H:%M"
     pm: po południu
+  views:
+    halls:
+      add_hall: "Dodać salę"
+    orders:
+      add_order: Nowe zamówienie
+      upcoming_orders: Nadchodzące zamówienia
+      archive: Archiwum
+      edit_title: "Edytuj zamównienie nr. %{id}"
+      new_title: "Nowe zamówenie"
+    users:
+      add_user: "Dodać użytkownika"
+      new_title: "Nowy użytkownik"
+      edit_title: "Edytuj użytkownika nr. %{id}"
+  buttons:
+    filters: "Filtry"
+    save: "Zapisz"
+    cancel: "Anuluj"
+    delete: "Usuń"
+    edit: "Zmień"
+  messages:
+    delete_confirmation: "Jesteś pewny, że chcesz wykasować zamówienie nr. %{id}?"

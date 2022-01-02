@@ -1,0 +1,11 @@
+<% content_for :title do %>
+    <%= Hall.model_name.human(count: :other) %>
+<% end %>
+
+<% content_for :actions do %>
+    <% if can? :create, Hall %>
+        <%= link_to fa_icon(:plus, class: 'mr-2', text: t('views.halls.add_hall')), new_hall_path, class: "btn btn-primary" %>
+    <% end %>
+<% end %>
+
+<%= render partial: 'shared/list_table', locals: { collection: @halls, model: Hall, list_attributes: method(:hall_list_attributes), edit_path: method(:edit_hall_path) } %>

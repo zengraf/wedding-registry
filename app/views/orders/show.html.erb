@@ -1,7 +1,17 @@
-<h2>
+<% content_for :title do %>
     <%= Order.model_name.human %> №<%= @order.id %>
     <% if @order.date.past? %>
         <span class="ml-2 badge badge-secondary">Archived</span>
     <% end %>
-</h2>
+<% end %>
+
+<% content_for :actions do %>
+    <% if can? :edit, @order %>
+        <%= link_to t('buttons.edit'), edit_order_path(@order), class: "btn btn-primary" %>
+    <% end %>
+    <% if can? :delete, @order %>
+        <%= link_to t('buttons.delete'), @order, method: :delete, data: { confirm: t('messages.delete_confirmation', id: @order.id) }, class: "btn btn-outline-danger mr-3" %>
+    <% end %>
+<% end %>
+
 <%= render partial: 'shared/attributes_table', locals: { object: @order, display_attributes: method(:order_display_attributes) } %>

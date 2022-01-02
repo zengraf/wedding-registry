@@ -1,4 +1,17 @@
 module OrdersHelper
+  def order_list_attributes(order)
+    {
+      id: link_to(order.id, order),
+      name: order.name,
+      surname: order.surname,
+      phone_number: TelephoneNumber.parse(order.phone_number, :pl).national_number(formatted: true),
+      date: order.date && I18n.l(order.date, format: :short),
+      hall: link_to(order.hall&.name, order.hall),
+      deposit: order.deposit,
+      confirmed: order.confirmed ? '✓' : '–',
+    }
+  end
+
   def order_display_attributes(order)
     {
       name: order.name,

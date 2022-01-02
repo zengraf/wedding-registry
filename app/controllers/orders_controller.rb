@@ -16,7 +16,8 @@ class OrdersController < ApplicationController
   def new; end
 
   def create
-    if @order.create { |o| o.added_by = current_user }
+    @order.added_by = current_user
+    if @order.save
       flash[:success] = "Zamówienie №#{@order.id} zostało pomyślnie złożone"
       redirect_to orders_path
     else

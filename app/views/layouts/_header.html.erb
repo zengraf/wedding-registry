@@ -8,6 +8,12 @@
                 <li class="nav-item"><%= link_to t('navbar.orders.upcoming'), orders_path, class: 'nav-link' %></li>
                 <li class="nav-item"><%= link_to t('navbar.orders.archived'), archive_path, class: 'nav-link' %></li>
             <% end %>
+            <% if can? :read, Hall %>
+                <li class="nav-item"><%= link_to Hall.model_name.human(count: 2), halls_path, class: 'nav-link' %></li>
+            <% end %>
+            <% if can? :read, User %>
+                <li class="nav-item"><%= link_to User.model_name.human(count: 2), users_path, class: 'nav-link' %></li>
+            <% end %>
         </ul>
     </div>
     <span class="navbar-text">

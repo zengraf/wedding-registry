@@ -1,0 +1,43 @@
+<%= form_for @user, class: "form-inline" do |f| %>
+    <div class="row">
+        <div class="from-group col">
+            <%= f.label :name, User.human_attribute_name(:name) %>
+            <%= f.text_field :name, class: "form-control", value: @user&.name, disabled: cannot?(:manage, @user, :name) %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :surname, User.human_attribute_name(:surname) %>
+            <%= f.text_field :surname, class: "form-control", value: @user&.surname, disabled: cannot?(:manage, @user, :surname) %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :email, User.human_attribute_name(:email) %>
+            <%= f.text_field :email, class: "form-control", value: @user&.email, disabled: cannot?(:manage, @user, :email) %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :phone_number, User.human_attribute_name(:phone_number) %>
+            <%= f.text_field :phone_number, class: "form-control", value: @user&.phone_number, disabled: cannot?(:manage, @user, :phone_number) %>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="from-group col">
+            <%= f.label :role, User.human_attribute_name(:role) %>
+            <%= f.select :role, User.roles.keys.collect { |r| [User.human_attribute_name("role.#{r}"), r] }, { selected: @user&.role }, class: "form-control", disabled: cannot?(:manage, @user, :role) %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :password, User.human_attribute_name(:password) %>
+            <%= f.password_field :password, class: "form-control", disabled: cannot?(:manage, @user, :password) %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :password_confirmation, User.human_attribute_name(:password_confirmation) %>
+            <%= f.password_field :password_confirmation, class: "form-control", disabled: cannot?(:manage, @user, :password_confirmation) %>
+        </div>
+    </div><br>
+    <%= f.submit t('buttons.save'), class: "btn btn-primary form-group mr-2", disabled: cannot?(:manage, @user) %>
+    <%= link_to t('buttons.cancel'), users_path, class: "btn btn-outline-primary form-group" %>
+    <% if @user.persisted? %>
+        <% if can? :delete, @user %>
+            <%= link_to t('buttons.delete'), @user, method: :delete, data: { confirm: t('messages.delete_confirmation', id: @user.id) }, class: "float-right btn btn-danger" %>
+        <% else %>
+            <button class="float-right btn btn-danger" disabled><%= t('buttons.delete') %></button>
+        <% end %>
+    <% end %>
+<% end %>

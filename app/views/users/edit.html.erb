@@ -1,0 +1,9 @@
+<%= render partial: 'shared/error_messages', locals: { object: @user } %>
+
+<% content_for :title do %>
+    <%= t('views.users.edit_title', id: @user.id) %>
+<% end %>
+
+<div class="card card-body my-4">
+    <%= render partial: 'form' %>
+</div>

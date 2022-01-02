@@ -1,5 +1,9 @@
-<%= render 'shared/error_messages' %>
-<h2>Edytuj zamówienie №<%= @order.id %></h2>
+<%= render partial: 'shared/error_messages', locals: { object: @order } %>
+
+<% content_for :title do %>
+    <%= t('views.orders.edit_title', id: @order.id) %>
+<% end %>
+
 <div class="card card-body my-4">
     <%= render partial: 'form', locals: { disabled: @order&.confirmed? && !current_user&.admin? } %>
 </div>

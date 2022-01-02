@@ -1,0 +1,46 @@
+<% if collection.present? %>
+    <table class="table table-hover">
+        <thead class="thead-light">
+        <tr>
+            <% list_attributes.call(model.new).each do |key, _| %>
+                <% if can? :read, model, key %>
+                    <th scope="col"><%= model.human_attribute_name(key) %></th>
+                <% end %>
+            <% end %>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% collection.each do |object| %>
+            <tr>
+                <% list_attributes.call(object).each do |key, value| %>
+                    <% if can? :read, model, key %>
+                        <% if can? :read, object, key %>
+                            <% if key == :id %>
+                                <th scope="row"><%= value %></th>
+                            <% else %>
+                                <td><%= value %></td>
+                            <% end %>
+                        <% else %>
+                            <td>***</td>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <td class="appear-on-hover">
+                    <%= link_to fa_icon(:eye, type: :solid), object, class: "text-secondary" %>
+                    <% if defined?(edit_path) and can? :edit, object %>
+                        <%= link_to fa_icon(:edit, type: :solid), edit_path.call(object), class: "text-secondary ml-2" %>
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+    <% if @pagy.present? %>
+        <%== pagy_bootstrap_nav(@pagy) %>
+    <% end %>
+<% else %>
+    <div class="alert alert-secondary">
+        No <%= model.model_name.human(count: :other).downcase %> are found
+    </div>
+<% end %>

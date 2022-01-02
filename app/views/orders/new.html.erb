@@ -1,5 +1,9 @@
-<%= render 'shared/error_messages' %>
-<h2>Nowe zamówienie</h2>
+<%= render partial: 'shared/error_messages', locals: { object: @order } %>
+
+<% content_for :title do %>
+    <%= t('views.orders.new_title') %>
+<% end %>
+
 <div class="card card-body my-4">
     <%= render partial: 'form', locals: { disabled: false } %>
 </div>

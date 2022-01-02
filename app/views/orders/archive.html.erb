@@ -1,9 +1,13 @@
-<h2 class="float-left">Archiwum</h2>
-<div class="d-flex flex-row-reverse my-4">
+<% content_for :title do %>
+    <%= t('views.orders.archive') %>
+<% end %>
+
+<% content_for :actions do %>
     <button class="btn btn-outline-primary" type="button" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
-        <%= fa_icon 'calendar-alt', type: :regular, text: '  Filtry' %>
+        <%= fa_icon 'calendar-alt', type: :regular, class: 'mr-2', text: t('buttons.filters') %>
     </button>
-</div>
+<% end %>
+
 <div class="collapse <%= 'show' if params[:filter] && !(@from.empty? && @to.empty? && @status.zero?) %>" id="collapseFilter">
     <div class="card card-body mb-4">
         <%= form_for :filter, method: :get, url: archive_path, class: "form-inline" do |f| %>
@@ -29,4 +33,4 @@
         <% end %>
     </div>
 </div>
-<%= render 'orders_table' %>
+<%= render partial: 'shared/list_table', locals: { collection: @orders, model: Order, list_attributes: method(:order_list_attributes), edit_path: method(:edit_order_path) } %>

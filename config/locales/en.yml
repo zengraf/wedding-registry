@@ -32,9 +32,15 @@
 en:
   activerecord:
     models:
+      hall:
+        one: Hall
+        other: Halls
       order:
         one: Order
         other: Orders
+      user:
+        one: User
+        other: Users
   errors:
     messages:
       date_is_reserved: is reserved on selected date
@@ -46,3 +52,24 @@ en:
       archived: Archived
     logout: Logout
     login: Login
+  views:
+    halls:
+      add_hall: "Add a hall"
+    orders:
+      add_order: New order
+      upcoming_orders: "Upcoming orders"
+      archive: "Archive"
+      edit_title: "Edit order no. %{id}"
+      new_title: "New order"
+    users:
+      add_user: "Add a user"
+      new_title: "New user"
+      edit_title: "Edit user no. %{id}"
+  buttons:
+    filters: "Filters"
+    save: "Save"
+    cancel: "Cancel"
+    delete: "Delete"
+    edit: "Edit"
+  messages:
+    delete_confirmation: "Are you sure you want to delete order no. %{id}?"

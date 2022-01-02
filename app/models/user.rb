@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   validates :name, :surname, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }, 'valid_email_2/email': { disposable: true }
-  validates :password, presence: true, confirmation: true, length: { in: 8..20 }
+  validates :password, presence: true, confirmation: true, length: { in: 8..20 }, allow_blank: true
   validates :phone_number, presence: true, telephone_number: { country: :pl }
   validates :role, presence: true
 

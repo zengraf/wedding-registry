@@ -1,0 +1,11 @@
+<% content_for :title do %>
+    <%= User.model_name.human(count: :other) %>
+<% end %>
+
+<% content_for :actions do %>
+    <% if can? :create, User %>
+        <%= link_to fa_icon(:plus, class: 'mr-2', text: t('views.users.add_user')), new_user_path, class: "btn btn-primary" %>
+    <% end %>
+<% end %>
+
+<%= render partial: 'shared/list_table', locals: { collection: @users, model: User, list_attributes: method(:user_list_attributes), edit_path: method(:edit_user_path) } %>

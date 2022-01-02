@@ -1,2 +1,14 @@
-<h2><%= User.model_name.human %> №<%= @user.id %></h2>
+<% content_for :title do %>
+    <%= User.model_name.human %> №<%= @user.id %>
+<% end %>
+
+<% content_for :actions do %>
+    <% if can? :edit, @user %>
+        <%= link_to t('buttons.edit'), edit_user_path(@user), class: "btn btn-primary" %>
+    <% end %>
+    <% if can? :delete, @user %>
+        <%= link_to t('buttons.delete'), @user, method: :delete, data: { confirm: t('messages.delete_confirmation', id: @user.id) }, class: "btn btn-outline-danger mr-3" %>
+    <% end %>
+<% end %>
+
 <%= render partial: 'shared/attributes_table', locals: { object: @user, display_attributes: method(:user_display_attributes) } %>
