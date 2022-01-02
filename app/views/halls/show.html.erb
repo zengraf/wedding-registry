@@ -1,0 +1,2 @@
+<h2><%= Hall.model_name.human %> №<%= @hall.id %></h2>
+<%= render partial: 'shared/attributes_table', locals: { object: @hall, display_attributes: method(:hall_display_attributes) } %>

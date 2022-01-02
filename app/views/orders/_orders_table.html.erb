@@ -24,14 +24,21 @@
                     <td><%= order.deposit %></td>
                     <td><%= order.hall.name %></td>
                     <td>
-                        <% if order.confirmed? %>
-                            Potwierdzone
+                        <% if can? :read, order, :confirmed %>
+                            <% if order.confirmed? %>
+                                Potwierdzone
+                            <% else %>
+                                Nie potwierdzone
+                            <% end %>
                         <% else %>
-                            Nie potwierdzone
+                            –
                         <% end %>
                     </td>
                     <td class="appear-on-hover">
-                        <%= link_to fa_icon(:edit, type: :solid), edit_order_path(order), class: "text-secondary" %>
+                        <%= link_to fa_icon(:eye, type: :solid), order_path(order), class: "text-secondary" %>
+                        <% if can? :edit, order %>
+                            <%= link_to fa_icon(:edit, type: :solid), edit_order_path(order), class: "text-secondary ml-2" %>
+                        <% end %>
                     </td>
                 </tr>
             <% end %>

@@ -1,0 +1,7 @@
+<h2>
+    <%= Order.model_name.human %> №<%= @order.id %>
+    <% if @order.date.past? %>
+        <span class="ml-2 badge badge-secondary">Archived</span>
+    <% end %>
+</h2>
+<%= render partial: 'shared/attributes_table', locals: { object: @order, display_attributes: method(:order_display_attributes) } %>

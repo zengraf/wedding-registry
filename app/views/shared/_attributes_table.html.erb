@@ -1,0 +1,12 @@
+<table class="table table-hover my-4">
+    <tbody>
+    <% display_attributes.call(object).each do |key, value| %>
+        <% if can? :read, object, key %>
+            <tr>
+                <th><%= Order.human_attribute_name(key) %></th>
+                <td><%= value %></td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+</table>

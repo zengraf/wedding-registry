@@ -34,7 +34,7 @@
     <%= f.submit "Zapisz", class: "btn btn-primary form-group mr-2", disabled: disabled %>
     <%= link_to "Anuluj", @order&.date || Date.today >= Date.today ? orders_path : archive_path, class: "btn btn-outline-primary form-group" %>
     <% if @order.persisted? %>
-        <% unless disabled %>
+        <% if can? :delete, @order %>
             <%= link_to "Wykasuj", @order, method: :delete, data: { confirm: "Jesteś pewny, że chcesz wykasować zamówienie №#{@order.id}?" }, class: "float-right btn btn-danger" %>
         <% else %>
             <button class="float-right btn btn-danger" disabled>Wykasuj</button>

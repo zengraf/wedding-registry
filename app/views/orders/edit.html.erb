@@ -1,5 +1,5 @@
 <%= render 'shared/error_messages' %>
 <h2>Edytuj zamówienie №<%= @order.id %></h2>
 <div class="card card-body my-4">
-    <%= render partial: 'orders/form', locals: { disabled: @order&.confirmed? && !current_user.admin? } %>
+    <%= render partial: 'form', locals: { disabled: @order&.confirmed? && !current_user&.admin? } %>
 </div>

@@ -30,4 +30,19 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      order:
+        one: Order
+        other: Orders
+  errors:
+    messages:
+      date_is_reserved: is reserved on selected date
+  navbar:
+    current_user: You are logged in as
+    orders:
+      main: Orders
+      upcoming: Upcoming
+      archived: Archived
+    logout: Logout
+    login: Login

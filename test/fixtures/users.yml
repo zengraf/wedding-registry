@@ -5,7 +5,7 @@ pawel:
   surname: Bartosz
   email: pawabarta@gmail.com
   phone_number: 48646286829
-  role: worker
+  role: manager
   #password: bartoszKool1357
   #password_confirmation: bartoszKool1357
   password_digest: <%= BCrypt::Password.create('bartoszKool1357', cost:4) %>

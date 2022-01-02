@@ -1,0 +1,2 @@
+<h2><%= User.model_name.human %> №<%= @user.id %></h2>
+<%= render partial: 'shared/attributes_table', locals: { object: @user, display_attributes: method(:user_display_attributes) } %>

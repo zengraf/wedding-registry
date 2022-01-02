@@ -10,7 +10,11 @@ class User < ApplicationRecord
 
   before_save :downcase_email
   
-  enum role: [ :worker, :admin ]
+  enum role: %i[manager admin]
+
+  def display_name
+    "#{name} #{surname}"
+  end
 
   def downcase_email
     self.email.downcase!
