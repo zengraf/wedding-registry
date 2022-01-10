@@ -1,0 +1,46 @@
+<%= form_with model: @task, url: [@order, @task] do |f| %>
+    <div class="row">
+        <div class="from-group col">
+            <%= f.label :name, Task.human_attribute_name(:name) %>
+            <%= f.text_field :name, class: "form-control", disabled: cannot?(:manage, @task, :name) %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :start_time, Task.human_attribute_name(:start_time) %>
+            <%= f.text_field :start_time, class: "form-control", disabled: cannot?(:manage, @task, :start_time) %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :end_time, Task.human_attribute_name(:end_time) %>
+            <%= f.text_field :end_time, class: "form-control", disabled: cannot?(:manage, @task, :end_time) %>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="from-group col">
+            <%= f.label :description, Task.human_attribute_name(:description) %>
+            <%= f.text_field :description, class: "form-control", disabled: cannot?(:manage, @task, :description) %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :actual_price, Task.human_attribute_name(:actual_price) %>
+            <%= f.number_field :actual_price, class: "form-control", disabled: cannot?(:manage, @task, :actual_price) %>
+        </div>
+        <div class="from-group col">
+            <%= f.label :price, Task.human_attribute_name(:price) %>
+            <%= f.number_field :price, class: "form-control", disabled: cannot?(:manage, @task, :price) %>
+        </div>
+    </div><br>
+    <%= f.submit t('buttons.save'), class: "btn btn-primary form-group mr-2", disabled: cannot?(:manage, @task) %>
+    <%= link_to t('buttons.cancel'), order_path(@order), class: "btn btn-outline-primary form-group" %>
+    <% if @task.persisted? %>
+        <% if can? :delete, @task %>
+            <%= link_to t('buttons.delete'), @task, method: :delete, data: { confirm: t('messages.task.delete_confirmation', name: @task.name, order_id: @order.id) }, class: "float-right btn btn-danger" %>
+        <% else %>
+            <button class="float-right btn btn-danger" disabled><%= t('buttons.delete') %></button>
+        <% end %>
+    <% end %>
+<% end %>
+
+<% content_for :head do %>
+    <script>
+      orderDate = Date.parse("<%= @order&.date || Date.tomorrow %>")
+    </script>
+    <%= javascript_pack_tag 'task_form', 'data-turbolinks-track': 'reload' %>
+<% end %>

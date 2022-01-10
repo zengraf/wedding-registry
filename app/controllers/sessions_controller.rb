@@ -2,17 +2,17 @@ class SessionsController < ApplicationController
   skip_before_action :require_login
 
   def new
-    redirect_to orders_url if logged_in?
+    redirect_to agenda_path if logged_in?
   end
 
   def create
     user = User.find_by(email: params[:session][:email])
     if user&.authenticate(params[:session][:password])
       log_in user
-      redirect_to orders_url
+      redirect_to agenda_path
     else
       # Display incorrect credentials error on login screen
-      flash.now[:danger] = 'Wprowadzono niepoprawny email lub hasło'
+      flash.now[:danger] = t('messages.incorrect_credentials')
       render 'new'
     end
   end

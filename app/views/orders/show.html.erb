@@ -1,17 +1,27 @@
 <% content_for :title do %>
-    <%= Order.model_name.human %> №<%= @order.id %>
+    <%= Order.model_name.human %> <%= @order.id %>
     <% if @order.date.past? %>
         <span class="ml-2 badge badge-secondary">Archived</span>
     <% end %>
 <% end %>
 
 <% content_for :actions do %>
+    <% if can? :create, Task %>
+        <%= link_to t('views.tasks.add_task'), new_order_task_path(@order), class: "btn btn-primary" %>
+    <% end %>
     <% if can? :edit, @order %>
-        <%= link_to t('buttons.edit'), edit_order_path(@order), class: "btn btn-primary" %>
+        <%= link_to t('buttons.edit'), edit_order_path(@order), class: "btn btn-outline-primary mr-2" %>
     <% end %>
     <% if can? :delete, @order %>
-        <%= link_to t('buttons.delete'), @order, method: :delete, data: { confirm: t('messages.delete_confirmation', id: @order.id) }, class: "btn btn-outline-danger mr-3" %>
+        <%= link_to t('buttons.delete'), @order, method: :delete, data: { confirm: t('messages.order.delete_confirmation', id: @order.id) }, class: "btn btn-outline-danger mr-2" %>
     <% end %>
 <% end %>
 
 <%= render partial: 'shared/attributes_table', locals: { object: @order, display_attributes: method(:order_display_attributes) } %>
+
+<% if @order.tasks.present? %>
+    <div class="my-3">
+        <h3 class="my-3"><%= Task.model_name.human(count: 2) %></h3>
+        <%= render partial: 'tasks/list', locals: { tasks: @order.tasks } %>
+    </div>
+<% end %>

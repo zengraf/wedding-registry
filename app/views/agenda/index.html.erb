@@ -1,0 +1,24 @@
+<% content_for :title do %>
+    <%= t('views.agenda.header', date: @date.today? ? t('date.today') : l(@date, format: :long)) %>
+<% end %>
+
+<% content_for :actions do %>
+    <%= link_to t('views.agenda.next_day'), agenda_path(@date.next_day), class: 'btn btn-outline-primary' %>
+    <%= link_to t('views.agenda.previeous_day'), agenda_path(@date.prev_day), class: 'btn btn-outline-primary mr-2' %>
+<% end %>
+
+<% if @orders.present? %>
+    <div class="my-3">
+        <h5><%= t('views.agenda.reserved_halls') %>:</h5>
+        <ul class="list-group">
+            <% @orders.each do |order| %>
+                <li class="list-group-item"><span class="font-weight-bold"><%= order.hall.name %></span> – <%= link_to "Order #{order.id}", order %></li>
+            <% end %>
+        </ul>
+    </div>
+<% end %>
+<ul class="list-group my-3">
+    <% @tasks.each do |task| %>
+        <%= render partial: 'entry', locals: { task: task } %>
+    <% end %>
+</ul>

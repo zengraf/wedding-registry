@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :added_by, class_name: 'User'
   belongs_to :hall
+  has_many :tasks
 
   scope :upcoming, -> { where('date >= ?', Date.today).order(:date) }
   scope :archived, -> { where('date < ?', Date.today).order(date: :desc) }

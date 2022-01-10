@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    <%= Hall.model_name.human %> №<%= @hall.id %>
+    <%= Hall.model_name.human %> <%= @hall.id %>
 <% end %>
 
 <% content_for :actions do %>
@@ -7,7 +7,7 @@
         <%= link_to t('buttons.edit'), edit_hall_path(@hall), class: "btn btn-primary" %>
     <% end %>
     <% if can? :delete, @hall %>
-        <%= link_to t('buttons.delete'), @hall, method: :delete, data: { confirm: t('messages.delete_confirmation', id: @hall.id) }, class: "btn btn-outline-danger mr-3" %>
+        <%= link_to t('buttons.delete'), @hall, method: :delete, data: { confirm: t('messages.hall.delete_confirmation', name: @hall.name) }, class: "btn btn-outline-danger mr-2" %>
     <% end %>
 <% end %>
 

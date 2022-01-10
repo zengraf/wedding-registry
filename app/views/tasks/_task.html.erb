@@ -1,0 +1,11 @@
+<li class="list-group-item list-group-item-action position-relative">
+    <b><%= task.name %></b><br/>
+    <%= l(task.start_time, format: :time) %>
+    <%- if task.end_time.present? -%>
+        - <%= l(task.end_time, format: :time) %>
+    <% end %>
+    <% if task.description.present? -%>
+        <p class="m-0"><%= task.description %></p>
+    <%- end %>
+    <%= link_to '', order_task_path(task.order_id, task.id), class: 'stretched-link' %>
+</li>

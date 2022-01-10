@@ -1,0 +1,11 @@
+<% content_for :title do %>
+    <%= t('views.tasks.header', id: params[:order_id]) %>
+<% end %>
+
+<% content_for :actions do %>
+    <% if can? :create, User %>
+        <%= link_to fa_icon(:plus, class: 'mr-2', text: t('views.tasks.add_task')), new_order_task_path, class: "btn btn-primary" %>
+    <% end %>
+<% end %>
+
+<%= render partial: 'list', locals: { tasks: @tasks } %>

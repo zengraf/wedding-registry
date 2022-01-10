@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_31_141539) do
+ActiveRecord::Schema.define(version: 2022_01_03_173259) do
 
   create_table "halls", force: :cascade do |t|
     t.string "name"
@@ -33,6 +33,19 @@ ActiveRecord::Schema.define(version: 2021_12_31_141539) do
     t.index ["hall_id"], name: "index_orders_on_hall_id"
   end
 
+  create_table "tasks", force: :cascade do |t|
+    t.string "name"
+    t.integer "order_id", null: false
+    t.text "description"
+    t.datetime "start_time", null: false
+    t.datetime "end_time"
+    t.decimal "actual_price", precision: 8, scale: 2
+    t.decimal "price", precision: 8, scale: 2, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_tasks_on_order_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "surname"
@@ -45,4 +58,5 @@ ActiveRecord::Schema.define(version: 2021_12_31_141539) do
   end
 
   add_foreign_key "orders", "users", column: "added_by_id"
+  add_foreign_key "tasks", "orders"
 end

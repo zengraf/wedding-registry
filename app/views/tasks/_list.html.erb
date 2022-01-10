@@ -1,0 +1,8 @@
+<% tasks.group_by { |t| t.start_time.to_date }.each do |date, tasks| %>
+    <h5><%= date %></h5>
+    <ul class="list-group">
+        <% tasks.each do |task| %>
+            <%= render partial: 'tasks/task', locals: { task: task } %>
+        <% end %>
+    </ul>
+<% end %>

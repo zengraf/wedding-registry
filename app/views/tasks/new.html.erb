@@ -1,0 +1,9 @@
+<%= render partial: 'shared/error_messages', locals: { object: @task } %>
+
+<% content_for :title do %>
+    <%= t('views.tasks.new_title', order_id: params[:order_id]) %>
+<% end %>
+
+<div class="card card-body my-4">
+    <%= render partial: 'form' %>
+</div>

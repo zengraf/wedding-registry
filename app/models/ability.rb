@@ -10,6 +10,7 @@ class Ability
     can :manage, Order, confirmed: false
     can :read, Order
     cannot :manage, Order, %i[confirmed added_by]
+    can :manage, Task
 
     return unless user.admin?
 

@@ -44,6 +44,7 @@ en:
   errors:
     messages:
       date_is_reserved: is reserved on selected date
+      time_should_be_after: should be after %{time}
   navbar:
     current_user: You are logged in as
     orders:
@@ -52,6 +53,7 @@ en:
       archived: Archived
     logout: Logout
     login: Login
+    agenda: Agenda
   views:
     halls:
       add_hall: "Add a hall"
@@ -65,6 +67,16 @@ en:
       add_user: "Add a user"
       new_title: "New user"
       edit_title: "Edit user no. %{id}"
+    tasks:
+      add_task: "Add task"
+      header: "Tasks for order no. %{id}"
+      edit_title: "Edit task no. %{id}"
+      new_title: "New task for order no. %{order_id}"
+    agenda:
+      header: "Agenda for %{date}"
+      next_day: "Next day"
+      previeous_day: "Previous day"
+      reserved_halls: "Reserved halls"
   buttons:
     filters: "Filters"
     save: "Save"
@@ -72,4 +84,18 @@ en:
     delete: "Delete"
     edit: "Edit"
   messages:
-    delete_confirmation: "Are you sure you want to delete order no. %{id}?"
+    order:
+      delete_confirmation: "Are you sure you want to delete order no. %{id}?"
+      not_found: "Order no. %{id} not found"
+    user:
+      delete_confirmation: "Are you sure you want to delete user %{email}?"
+    task:
+      delete_confirmation: Are you sure you want to delete task "%{name}" for order no. %{order_id}?
+    hall:
+      delete_confirmation: Are you sure you want to delete hall "%{name}"?
+    incorrect_credentials: "Incorrect email or password"
+  time:
+    formats:
+      time: "%I:%M %P"
+  date:
+    today: "today"

@@ -1,5 +1,5 @@
 <% content_for :title do %>
-    <%= User.model_name.human %> №<%= @user.id %>
+    <%= User.model_name.human %> <%= @user.id %>
 <% end %>
 
 <% content_for :actions do %>
@@ -7,7 +7,7 @@
         <%= link_to t('buttons.edit'), edit_user_path(@user), class: "btn btn-primary" %>
     <% end %>
     <% if can? :delete, @user %>
-        <%= link_to t('buttons.delete'), @user, method: :delete, data: { confirm: t('messages.delete_confirmation', id: @user.id) }, class: "btn btn-outline-danger mr-3" %>
+        <%= link_to t('buttons.delete'), @user, method: :delete, data: { confirm: t('messages.user.delete_confirmation', email: @user.email) }, class: "btn btn-outline-danger mr-2" %>
     <% end %>
 <% end %>
 

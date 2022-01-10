@@ -70,6 +70,7 @@ pl:
     - :day
     - :month
     - :year
+    today: "dzisiaj"
   datetime:
     distance_in_words:
       about_x_hours:
@@ -159,6 +160,7 @@ pl:
       present: musi być puste
       required: musi istnieć
       taken: zostało już zajęte
+      time_should_be_after: musi być po %{time}
       too_long:
         one: jest za długie (maksymalnie jeden znak)
         few: jest za długie (maksymalnie %{count} znaki)
@@ -196,6 +198,7 @@ pl:
       archived: Archiwum
     logout: Wyloguj się
     login: "Zaloguj się"
+    agenda: "Agenda"
   number:
     currency:
       format:
@@ -257,6 +260,7 @@ pl:
       default: "%a, %-d %b %Y %H:%M:%S %z"
       long: "%-d %B %Y %H:%M"
       short: "%-d %b %H:%M"
+      time: "%H:%M"
     pm: po południu
   views:
     halls:
@@ -271,6 +275,16 @@ pl:
       add_user: "Dodać użytkownika"
       new_title: "Nowy użytkownik"
       edit_title: "Edytuj użytkownika nr. %{id}"
+    tasks:
+      add_task: "Dodać zadanie"
+      header: "Zadania do zamówienia nr. %{id}"
+      edit_title: "Edytuj zadanie nr. %{id}"
+      new_title: "Nowe zadanie dla zamówienia nr. %{order_id}"
+    agenda:
+      header: "Agenda dla %{date}"
+      next_day: "Następny dzień"
+      previeous_day: "Poprzedni dzień"
+      reserved_halls: "Zarezerwowane sale"
   buttons:
     filters: "Filtry"
     save: "Zapisz"
@@ -278,4 +292,13 @@ pl:
     delete: "Usuń"
     edit: "Zmień"
   messages:
-    delete_confirmation: "Jesteś pewny, że chcesz wykasować zamówienie nr. %{id}?"
+    order:
+      delete_confirmation: "Czy na pewno chcesz usunąć zamówienie nr. %{id}?"
+      not_found: "Zamówienia nr. %{id} nie znalieziono"
+    user:
+      delete_confirmation: "Czy na pewno chcesz usunąć użytkownika %{email}?"
+    task:
+      delete_confirmation: Czy na pewno chcesz usunąć zadanie "%{name}" dla zamówienia nr. %{order_id}?
+    hall:
+      delete_confirmation: Czy na pewno chcesz usunąć salę "%{name}"?
+    incorrect_credentials: "Niepoprawny email lub hasło"

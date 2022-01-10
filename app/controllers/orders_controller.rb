@@ -18,7 +18,6 @@ class OrdersController < ApplicationController
   def create
     @order.added_by = current_user
     if @order.save
-      flash[:success] = "Zamówienie №#{@order.id} zostało pomyślnie złożone"
       redirect_to orders_path
     else
       render 'new'
@@ -29,7 +28,6 @@ class OrdersController < ApplicationController
 
   def update
     if @order.update(order_params)
-      flash[:success] = "Zamówienie №#{@order.id} zostało pomyślnie zmienione"
       redirect_to @order.date.past? ? archive_path : orders_path
     else
       render 'edit'

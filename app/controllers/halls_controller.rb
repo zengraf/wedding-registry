@@ -5,18 +5,29 @@ class HallsController < ApplicationController
 
   def show; end
 
+  def new; end
+
   def create
-    @hall.create
+    if @hall.save
+      redirect_to halls_path
+    else
+      render :new
+    end
   end
 
   def edit; end
 
   def update
-    @hall.update(hall_params)
+    if @hall.update(hall_params)
+      redirect_to halls_path
+    else
+      render :edit
+    end
   end
 
   def destroy
     @hall.destroy
+    redirect_to halls_path
   end
 
   protected

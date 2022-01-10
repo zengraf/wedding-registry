@@ -1,0 +1,14 @@
+<% content_for :title do %>
+    <%= Task.model_name.human %> <%= @task.id %>
+<% end %>
+
+<% content_for :actions do %>
+    <% if can? :edit, @task %>
+        <%= link_to t('buttons.edit'), edit_order_task_path, class: "btn btn-primary" %>
+    <% end %>
+    <% if can? :delete, @task %>
+        <%= link_to t('buttons.delete'), order_task_path(@order, @task), method: :delete, data: { confirm: t('messages.task.delete_confirmation', name: @task.name, order_id: @order.id) }, class: "btn btn-outline-danger mr-2" %>
+    <% end %>
+<% end %>
+
+<%= render partial: 'shared/attributes_table', locals: { object: @task, display_attributes: method(:task_display_attributes) } %>
