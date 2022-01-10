@@ -9,7 +9,6 @@ class UsersController < ApplicationController
 
   def create
     if @user.save
-      flash[:success] = "Użytkownik №#{@user.id} został dodany"
       redirect_to users_path
     else
       render 'new'
@@ -20,7 +19,6 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:success] = "Użytkownik №#{@user.id} został zmieniony"
       redirect_to users_path
     else
       render 'edit'

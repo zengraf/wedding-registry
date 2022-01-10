@@ -265,6 +265,8 @@ pl:
   views:
     halls:
       add_hall: "Dodać salę"
+      edit_title: "Edytuj salę nr. %{id}"
+      new_title: "Nowa sala"
     orders:
       add_order: Nowe zamówienie
       upcoming_orders: Nadchodzące zamówienia
@@ -302,3 +304,4 @@ pl:
     hall:
       delete_confirmation: Czy na pewno chcesz usunąć salę "%{name}"?
     incorrect_credentials: "Niepoprawny email lub hasło"
+    login_required: "Żeby uzyskać dostęp do tej strony, należy zalogować się"

@@ -1,0 +1,9 @@
+<%= render partial: 'shared/error_messages', locals: { object: @hall } %>
+
+<% content_for :title do %>
+    <%= t('views.halls.new_title') %>
+<% end %>
+
+<div class="card card-body my-4">
+    <%= render partial: 'form' %>
+</div>

@@ -5,5 +5,5 @@
 <% end %>
 
 <div class="card card-body my-4">
-    <%= render partial: 'form', locals: { disabled: @order&.confirmed? && !current_user&.admin? } %>
+    <%= render partial: 'form' %>
 </div>

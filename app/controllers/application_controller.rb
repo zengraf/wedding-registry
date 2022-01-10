@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   def require_login
     return true if logged_in?
 
-    flash[:danger] = 'Żeby uzyskać dostęp do tej strony, należy zalogować się'
+    flash[:danger] = t('messages.login_required')
     redirect_to login_url
   end
 

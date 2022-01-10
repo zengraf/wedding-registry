@@ -1,0 +1,17 @@
+<%= form_with model: @hall do |f| %>
+    <div class="row">
+        <div class="from-group col-md-6">
+            <%= f.label :name, Hall.human_attribute_name(:name) %>
+            <%= f.text_field :name, class: "form-control", disabled: cannot?(:manage, @hall, :name) %>
+        </div>
+    </div><br/>
+    <%= f.submit t('buttons.save'), class: "btn btn-primary form-group mr-2", disabled: cannot?(:manage, @hall) %>
+    <%= link_to t('buttons.cancel'), halls_path, class: "btn btn-outline-primary form-group" %>
+    <% if @hall.persisted? %>
+        <% if can? :delete, @hall %>
+            <%= link_to t('buttons.delete'), @hall, method: :delete, data: { confirm: t('messages.hall.delete_confirmation', name: @hall.name) }, class: "float-right btn btn-danger" %>
+        <% else %>
+            <button class="float-right btn btn-danger" disabled><%= t('buttons.delete') %></button>
+        <% end %>
+    <% end %>
+<% end %>

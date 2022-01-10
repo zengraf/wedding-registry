@@ -57,6 +57,8 @@ en:
   views:
     halls:
       add_hall: "Add a hall"
+      edit_title: "Edit hall no. %{id}"
+      new_title: "New hall"
     orders:
       add_order: New order
       upcoming_orders: "Upcoming orders"
@@ -94,6 +96,7 @@ en:
     hall:
       delete_confirmation: Are you sure you want to delete hall "%{name}"?
     incorrect_credentials: "Incorrect email or password"
+    login_required: "You have to log in before accessing this page"
   time:
     formats:
       time: "%I:%M %P"
