@@ -1,4 +1,4 @@
-<%= form_with model: @hall do |f| %>
+<%= form_with model: @hall, local: true do |f| %>
     <div class="row">
         <div class="from-group col-md-6">
             <%= f.label :name, Hall.human_attribute_name(:name) %>

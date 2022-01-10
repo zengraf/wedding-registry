@@ -19,9 +19,9 @@ class TasksController < ApplicationController
   def create
     @task = @order.tasks.build(task_params)
     if @task.save
-      redirect_to order_tasks_path(@order, @task)
+      redirect_to order_path(@order)
     else
-      render :new
+      render 'new'
     end
   end
 
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to order_path(@order)
     else
-      render :edit
+      render 'edit'
     end
   end
 

@@ -11,7 +11,7 @@ class HallsController < ApplicationController
     if @hall.save
       redirect_to halls_path
     else
-      render :new
+      render 'new'
     end
   end
 
@@ -21,7 +21,7 @@ class HallsController < ApplicationController
     if @hall.update(hall_params)
       redirect_to halls_path
     else
-      render :edit
+      render 'edit'
     end
   end
 
